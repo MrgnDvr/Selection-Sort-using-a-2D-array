@@ -1,0 +1,69 @@
+#include <iostream>
+using namespace std;
+
+// Function to perform selection sort on a 2D array
+void selectionSort2D(int rows, int cols, int arr[][100]) {
+    int totalElements = rows * cols; // Total elements in the 2D array
+
+    for (int i = 0; i < totalElements - 1; ++i) {
+        int minIndex = i;
+
+        // Find the index of the minimum element in the unsorted part
+        for (int j = i + 1; j < totalElements; ++j) {
+            int row1 = minIndex / cols;
+            int col1 = minIndex % cols;
+
+            int row2 = j / cols;
+            int col2 = j % cols;
+
+            if (arr[row2][col2] < arr[row1][col1]) {
+                minIndex = j;
+            }
+        }
+
+        // Swap the found minimum element with the current element
+        if (minIndex != i) {
+            int row1 = i / cols;
+            int col1 = i % cols;
+
+            int row2 = minIndex / cols;
+            int col2 = minIndex % cols;
+
+            swap(arr[row1][col1], arr[row2][col2]);
+        }
+    }
+}
+
+int main() {
+    int rows, cols;
+
+    // Input the 2D array dimensions
+    cout << "Enter number of rows: ";
+    cin >> rows;
+    cout << "Enter number of columns: ";
+    cin >> cols;
+
+    int arr[100][100]; // Assuming maximum size of 100x100
+
+    // Input the 2D array elements
+    cout << "Enter elements of the 2D array:\n";
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            cin >> arr[i][j];
+        }
+    }
+
+    // Sort the 2D array using selection sort
+    selectionSort2D(rows, cols, arr);
+
+    // Output the sorted 2D array
+    cout << "Sorted 2D array:\n";
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
